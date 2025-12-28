@@ -1,0 +1,2 @@
+/Users/benedettabanzi/Documents/bicciatolab_data/SpaceTrooper_data/CosMx_protein_tonsil_metadata.rds filter=lfs diff=lfs merge=lfs -text
+/Users/benedettabanzi/Documents/bicciatolab_data/SpaceTrooper_data/MERFISH_mouse_liver_metadata.rds filter=lfs diff=lfs merge=lfs -text
