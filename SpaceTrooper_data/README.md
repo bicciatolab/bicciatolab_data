@@ -3,7 +3,7 @@
 This directory contains metadata files required to replicate the analysis described in the bioRxiv paper:
 **doi: [https://doi.org/10.64898/2025.12.24.696336](https://doi.org/10.64898/2025.12.24.696336)**
 
-These files support the [SpaceTrooper](https://github.com/drighelli/SpaceTrooper) package analysis ([Bioconductor page](https://bioconductor.org/packages/3.23/bioc/html/SpaceTrooper.html)).
+These files support the [SpaceTrooper](https://bioconductor.org/packages/3.23/bioc/html/SpaceTrooper.html) package analysis, available in Bioconductor. A developmental version is also avilable on [GitHub](https://github.com/drighelli/SpaceTrooper)
 
 ## Contents
 
@@ -21,7 +21,7 @@ This directory contains 5 R Data Serialization (.rds) files with metadata for di
 
 The `InSituType_references/` subdirectory contains reference matrices for performing InSituType cell phenotyping:
 
-1. **Human DCIS scRNAseq simple_profileMatrix.csv** (~191 KB) - Reference matrix for human datasets (matches with Xenium lung cancer dataset)
+1. **Human DCIS scRNAseq simple_profileMatrix.csv** (~191 KB) - Reference matrix for human datasets (matches with CosMx RNA DBKERO dataset)
 2. **Mouse liver cells_profileMatrix.csv** (~7.7 MB) - Reference matrix for mouse liver dataset (matches with MERFISH mouse liver dataset)
 
 ## How to Download
