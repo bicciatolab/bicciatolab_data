@@ -85,8 +85,11 @@ Load the metadata files in R:
 # Load metadata
 metadata <- readRDS("SpaceTrooper_data/CosMx_protein_tonsil_metadata.rds")
 
-# Load reference matrix for InSituType
-reference <- read.csv("SpaceTrooper_data/InSituType_references/Mouse liver cells_profileMatrix.csv")
+# Load reference matrix for InSituType (mouse liver dataset)
+mouse_reference <- read.csv("SpaceTrooper_data/InSituType_references/Mouse liver cells_profileMatrix.csv")
+
+# Load reference matrix for InSituType (human datasets)
+human_reference <- read.csv("SpaceTrooper_data/InSituType_references/Human DCIS scRNAseq simple_profileMatrix.csv")
 ```
 
 ## Citation
