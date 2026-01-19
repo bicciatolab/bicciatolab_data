@@ -1,15 +1,19 @@
 # SpaceTrooper Data
 
-This directory contains metadata files required to replicate the analysis described in the bioRxiv paper:
-**doi: [https://doi.org/10.64898/2025.12.24.696336](https://doi.org/10.64898/2025.12.24.696336)**
+<img src="https://github.com/bicciatolab/bicciatolab_data/SpaceTrooper_data_and_scripts/SpaceTrooper_logo.png" alt="SpaceTrooper Logo" width="100" style="float:right; margin:0 0 10px 10px;"/>
 
-These files support the [SpaceTrooper](https://bioconductor.org/packages/3.23/bioc/html/SpaceTrooper.html) package analysis, available in Bioconductor. A developmental version is also avilable on [GitHub](https://github.com/drighelli/SpaceTrooper)
+This directory contains metadata files, InSituType reference matrices, and R scripts required to replicate the analysis described in the `SpaceTrooper` bioRxiv paper:
+**[https://doi.org/10.64898/2025.12.24.696336](https://doi.org/10.64898/2025.12.24.696336)**
+
+
+These files support the developmental version of `SpaceTrooper` package, available on [GitHub](https://github.com/drighelli/SpaceTrooper).
+
 
 ## Contents
 
 ### Metadata Files (.rds)
 
-This directory contains 5 R Data Serialization (.rds) files with metadata for different spatial transcriptomics datasets:
+The [Spe_metadata]() directory contains 5 R Data Serialization (.rds) files with metadata for different spatial transcriptomics datasets:
 
 1. **CosMx_protein_tonsil_metadata.rds** (~245 MB) - Metadata for CosMx protein tonsil dataset
 2. **CosMx_rna_DBKERO_metadata.rds** (~6 MB) - Metadata for CosMx RNA DBKERO dataset
