@@ -1,0 +1,20 @@
+# CRAN Packages
+generics=0.1.4
+matrixStats=1.5.0
+sf=1.0.23
+ggplot2=4.0.1
+
+# Bioconductor Packages
+SpatialExperiment=1.20.0
+SingleCellExperiment=1.32.0
+SummarizedExperiment=1.40.0
+Biobase=2.70.0
+GenomicRanges=1.62.1
+Seqinfo=1.0.0
+IRanges=2.44.0
+S4Vectors=0.48.0
+BiocGenerics=0.56.0
+MatrixGenerics=1.22.0
+
+# GitHub https://github.com/drighelli/SpaceTrooper/tree/devel
+SpaceTrooper==1.1.3

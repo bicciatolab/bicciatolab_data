@@ -36,6 +36,20 @@ The [Scripts](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTro
 1. **Scripts_for_spe** - subdirectory containing the scripts used to build the **SpatialExperiment** objects used in the paper's analysis
 2. **Scripts_for_figures** - subdirectory containing the scripts used to create the paper's figures
 
+To reproduce the analysis, we provide a [requirements.txt](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Scripts/requirements.txt) file containing the version of used packages, along with a [SpaceTrooper.yml](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Scripts/SpaceTrooper.yml) to create a reproducible `anaconda` environment using either **conda** or **mamba** bash command:
+
+```bash
+# conda env create -f SpaceTrooper.yml
+mamba env create -f SpaceTrooper.yml
+```
+
+Downstream analysis of **figure 2** (and related supplementary images) was performed using Seurat package. A separate [requirements_Seurat.txt](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Scripts/requirements_Seurat.txt) file is provided to reproduce this analysis, along with a separated  [Seurat_v5.yml](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Scripts/Seurat_v5.yml):
+
+```bash
+# conda env create -f Seurat_v5.yml
+mamba env create -f Seurat_v5.yml
+```
+
 <br/><br/>
 
 ## How to Download 
