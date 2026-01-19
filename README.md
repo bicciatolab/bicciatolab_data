@@ -1,8 +1,10 @@
 # bicciatolab_data
 Data repository for bicciatolab projects
+<br/><br/>
 
 ## popsicleR tutorial data
 Data repository for cellranger data required by `popsicleR` tutorial analysis (https://raw.githack.com/bicciatolab/popsicleR/main/docs/popsicleR_tutorial.html). Required input files are stored in `popsicleR_tutorial` directory.
+<br/><br/>
 
 ## SpaceTrooper data and scripts
 Data repository containing metadata and scripts used in `SpaceTrooper` paper (doi: https://doi.org/10.64898/2025.12.24.696336):

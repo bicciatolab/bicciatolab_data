@@ -1,6 +1,6 @@
 # SpaceTrooper Data
 
-<img src="https://github.com/bicciatolab/bicciatolab_data/SpaceTrooper_data_and_scripts/SpaceTrooper_logo.png" alt="SpaceTrooper Logo" width="100" style="float:right; margin:0 0 10px 10px;"/>
+<img src="https://github.com/bicciatolab/bicciatolab_data/blob/main/SpaceTrooper_data_and_scripts/SpaceTrooper_logo.png" alt="SpaceTrooper Logo" width="100" style="float:right; margin:0 0 10px 10px;"/>
 
 This directory contains metadata files, InSituType reference matrices, and R scripts required to replicate the analysis described in the `SpaceTrooper` bioRxiv paper:
 **[https://doi.org/10.64898/2025.12.24.696336](https://doi.org/10.64898/2025.12.24.696336)**
@@ -8,12 +8,13 @@ This directory contains metadata files, InSituType reference matrices, and R scr
 
 These files support the developmental version of `SpaceTrooper` package, available on [GitHub](https://github.com/drighelli/SpaceTrooper).
 
+<br/><br/>
 
 ## Contents
 
 ### Metadata Files (.rds)
 
-The [Spe_metadata]() directory contains 5 R Data Serialization (.rds) files with metadata for different spatial transcriptomics datasets:
+The [Spe_metadata](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Spe_metadata) subdirectory contains 5 R Data Serialization (.rds) files with metadata for different spatial transcriptomics datasets:
 
 1. **CosMx_protein_tonsil_metadata.rds** (~245 MB) - Metadata for CosMx protein tonsil dataset
 2. **CosMx_rna_DBKERO_metadata.rds** (~6 MB) - Metadata for CosMx RNA DBKERO dataset
@@ -23,12 +24,21 @@ The [Spe_metadata]() directory contains 5 R Data Serialization (.rds) files with
 
 ### InSituType Reference Matrices
 
-The `InSituType_references/` subdirectory contains reference matrices for performing InSituType cell phenotyping:
+The [InSituType_references](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/InSituType_references) subdirectory contains reference matrices for performing InSituType cell phenotyping:
 
 1. **Human DCIS scRNAseq simple_profileMatrix.csv** (~191 KB) - Reference matrix for human datasets (matches with CosMx RNA DBKERO dataset)
 2. **Mouse liver cells_profileMatrix.csv** (~7.7 MB) - Reference matrix for mouse liver dataset (matches with MERFISH mouse liver dataset)
 
-## How to Download
+### Scripts
+
+The [Scripts](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Scripts) subdirectory contains the R scripts used to build the **SpatialExperiment** (Spe) objects and create paper's figures:
+
+1. **Scripts_for_spe** - subdirectory containing the scripts used to build the **SpatialExperiment** objects used in the paper's analysis
+2. **Scripts_for_figures** - subdirectory containing the scripts used to create the paper's figures
+
+<br/><br/>
+
+## How to Download 
 
 ### For Files < 50 MB
 
@@ -82,21 +92,8 @@ cd bicciatolab_data
 git lfs pull
 ```
 
-## Usage
-
-Load the metadata files in R:
-```R
-# Load metadata
-metadata <- readRDS("SpaceTrooper_data/CosMx_protein_tonsil_metadata.rds")
-
-# Load reference matrix for InSituType (mouse liver dataset)
-mouse_reference <- read.csv("SpaceTrooper_data/InSituType_references/Mouse liver cells_profileMatrix.csv")
-
-# Load reference matrix for InSituType (human datasets)
-human_reference <- read.csv("SpaceTrooper_data/InSituType_references/Human DCIS scRNAseq simple_profileMatrix.csv")
-```
+<br/><br/>
 
 ## Citation
 
-If you use these datasets, please cite the SpaceTrooper paper:
-- bioRxiv doi: [https://doi.org/10.64898/2025.12.24.696336](https://doi.org/10.64898/2025.12.24.696336)
+If you use these datasets, please cite the `SpaceTrooper` paper: [https://doi.org/10.64898/2025.12.24.696336](https://doi.org/10.64898/2025.12.24.696336)
