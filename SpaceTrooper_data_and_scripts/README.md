@@ -14,13 +14,14 @@ These files support the developmental version of `SpaceTrooper` package, availab
 
 ### Metadata Files (.rds)
 
-The [Spe_metadata](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Spe_metadata) subdirectory contains 5 R Data Serialization (.rds) files with metadata for different spatial transcriptomics datasets:
+The [Spe_metadata](https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Spe_metadata) subdirectory contains 5 R Data Serialization (.rds) files with metadata for different spatial transcriptomics datasets, plus the downstream analysis results on CosMx DBKERO dataset:
 
 1. **CosMx_protein_tonsil_metadata.rds** (~245 MB) - Metadata for CosMx protein tonsil dataset
 2. **CosMx_rna_DBKERO_metadata.rds** (~6 MB) - Metadata for CosMx RNA DBKERO dataset
 3. **CosMx_rna_pancreas_metadata.rds** (~6 MB) - Metadata for CosMx RNA pancreas dataset
 4. **MERFISH_mouse_liver_metadata.rds** (~75 MB) - Metadata for MERFISH mouse liver dataset
 5. **Xenium_lung_cancer_metadata.rds** (~12 MB) - Metadata for Xenium lung cancer dataset
+6. **CosMx_rna_DBKERO_downstream_effects_results.rds** (~3 MB) - Downstream analysis results for CosMx RNA DBKERO dataset
 
 ### InSituType Reference Matrices
 
