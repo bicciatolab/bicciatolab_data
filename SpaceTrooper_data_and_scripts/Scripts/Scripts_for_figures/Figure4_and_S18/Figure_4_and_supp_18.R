@@ -568,8 +568,55 @@ pdf(file.path("SuppFigure18.pdf"),
 print(final_plot)
 dev.off()
 
-
-
-
-
-
+sessionInfo()
+# R version 4.5.1 (2025-06-13 ucrt)
+# Platform: x86_64-w64-mingw32/x64
+# Running under: Windows 11 x64 (build 26200)
+# 
+# Matrix products: default
+# LAPACK version 3.12.1
+# 
+# locale:
+#   [1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8    LC_MONETARY=English_United States.utf8
+# [4] LC_NUMERIC=C                           LC_TIME=English_United States.utf8    
+# 
+# time zone: Europe/Rome
+# tzcode source: internal
+# 
+# attached base packages:
+#   [1] stats4    stats     graphics  grDevices utils     datasets  methods   base     
+# 
+# other attached packages:
+#   [1] patchwork_1.3.2             sf_1.0-24                   dplyr_1.1.4                 ggplot2_4.0.1              
+# [5] SpaceTrooper_1.1.3          SpatialExperiment_1.20.0    SingleCellExperiment_1.32.0 SummarizedExperiment_1.40.0
+# [9] Biobase_2.70.0              GenomicRanges_1.62.1        Seqinfo_1.0.0               IRanges_2.44.0             
+# [13] S4Vectors_0.48.0            BiocGenerics_0.56.0         generics_0.1.4              MatrixGenerics_1.22.0      
+# [17] matrixStats_1.5.0          
+# 
+# loaded via a namespace (and not attached):
+#   [1] DBI_1.2.3                 gridExtra_2.3             rlang_1.1.7               magrittr_2.0.4           
+# [5] scater_1.38.0             e1071_1.7-17              compiler_4.5.1            DelayedMatrixStats_1.32.0
+# [9] SpatialExperimentIO_1.2.0 sfheaders_0.4.5           vctrs_0.7.1               pkgconfig_2.0.3          
+# [13] shape_1.4.6.1             backports_1.5.0           magick_2.9.0              XVector_0.50.0           
+# [17] scuttle_1.20.0            ggbeeswarm_0.7.3          purrr_1.2.1               bit_4.6.0                
+# [21] glmnet_4.1-10             beachmat_2.26.0           rhdf5filters_1.22.0       DelayedArray_0.36.0      
+# [25] Rhdf5lib_1.32.0           BiocParallel_1.44.0       terra_1.8-93              irlba_2.3.5.1            
+# [29] broom_1.0.11              parallel_4.5.1            R6_2.6.1                  RColorBrewer_1.1-3       
+# [33] limma_3.66.0              car_3.1-3                 Rcpp_1.1.1                assertthat_0.2.1         
+# [37] iterators_1.0.14          R.utils_2.13.0            Matrix_1.7-4              splines_4.5.1            
+# [41] tidyselect_1.2.1          viridis_0.6.5             rstudioapi_0.17.1         dichromat_2.0-0.1        
+# [45] abind_1.4-8               codetools_0.2-20          lattice_0.22-7            tibble_3.3.1             
+# [49] withr_3.0.2               S7_0.2.1                  survival_3.8-3            units_1.0-0              
+# [53] proxy_0.4-29              pillar_1.11.1             ggpubr_0.6.2              carData_3.0-5            
+# [57] KernSmooth_2.23-26        foreach_1.5.2             sparseMatrixStats_1.22.0  scales_1.4.0             
+# [61] class_7.3-23              glue_1.8.0                tools_4.5.1               BiocNeighbors_2.4.0      
+# [65] robustbase_0.99-6         data.table_1.18.0         ScaledMatrix_1.18.0       locfit_1.5-9.12          
+# [69] ggsignif_0.6.4            cowplot_1.2.0             rhdf5_2.54.1              grid_4.5.1               
+# [73] tidyr_1.3.2               DropletUtils_1.30.0       edgeR_4.8.2               colorspace_2.1-2         
+# [77] beeswarm_0.4.0            BiocSingular_1.26.1       HDF5Array_1.38.0          vipor_0.4.7              
+# [81] rsvd_1.0.5                Formula_1.2-5             cli_3.6.5                 viridisLite_0.4.2        
+# [85] S4Arrays_1.10.1           arrow_23.0.0              gtable_0.3.6              DEoptimR_1.1-4           
+# [89] R.methodsS3_1.8.2         rstatix_0.7.3             classInt_0.4-11           ggrepel_0.9.6            
+# [93] SparseArray_1.10.8        dqrng_0.4.1               rjson_0.2.23              farver_2.1.2             
+# [97] R.oo_1.27.1               lifecycle_1.0.5           h5mread_1.2.1             statmod_1.5.1            
+# [101] bit64_4.6.0-1
