@@ -19,7 +19,7 @@ fov.insert.2 <- "B18"
 fov.insert.3 <- "E9"
 fov.insert.4 <- "D12"
 
-source("service.R")
+source("service/service.R")
 
 ### Define ad hoc plot theme
 my.theme <- theme(panel.border=element_blank(),
