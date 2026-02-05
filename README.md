@@ -1,5 +1,5 @@
-# bicciatolab_data
-Data repository for bicciatolab projects
+# bicciatolab data and scripts
+Data and script repository for bicciatolab projects
 <br/><br/>
 
 ## popsicleR tutorial data
