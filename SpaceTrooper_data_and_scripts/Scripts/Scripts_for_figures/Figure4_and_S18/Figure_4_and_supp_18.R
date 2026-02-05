@@ -317,7 +317,7 @@ final_plot <- row1 / row2 +
 # Save PDF
 pdf(file.path("Figure4_BCEFGH.pdf"), 
     width = 10, height = 12, bg = "transparent")
-print(final_plot)
+final_plot
 dev.off()
 
 # Supplementary figure 18
@@ -565,7 +565,7 @@ pdf(file.path("SuppFigure18.pdf"),
     width = 10, 
     height = 16, 
     bg = "transparent")
-print(final_plot)
+final_plot
 dev.off()
 
 sessionInfo()

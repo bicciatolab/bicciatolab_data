@@ -319,7 +319,8 @@ pdf(file.path("Figure3B_C.pdf"),
 final_plot
 dev.off()
 
-# Supplementary figure 16A and 16D
+# Supplementary figure 16A
+# plotted together with supplementary figure 16D
 
 ### QS per cell type
 var.cell.types <- "InSituType_Simple"
@@ -631,7 +632,7 @@ spe <- spe.orig@colData
 sub.spe.bord <- sub.spe.orig.bord@colData
 sub.spe.triad <- sub.spe.orig.triad@colData
 
-### Coordinates of the board insert
+### Coordinates of the border insert
 bbox <- st_bbox(sub.spe.bord$polygons)
 insert.bord.x <- c(bbox[1],bbox[3])
 insert.bord.y <- c(bbox[2],bbox[4])
@@ -661,6 +662,15 @@ celltype_palette_simple <- c(
   "undefined" = "grey80",
   "VSMCs" = "lightgoldenrod4"
 )
+
+# load transcript file available at: https://info.vizgen.com/mouse-liver-data?submissionGuid=01f8b3c0-46a8-414c-92fc-4334f920dfe4
+
+tx <- fread("Liver1Slice1_detected_transcripts.csv")
+
+# subset for FOV border insert
+
+tx <- st_as_sf(tx, coords=c("global_x", "global_y"))
+tx.insert.bord <- tx[tx$fov%in%fov.insert.bord,]
 
 # Figure 3D 
 
@@ -919,46 +929,50 @@ pdf(file.path("SuppFigure17A.pdf"),
 p.viol
 dev.off()
 
-### Cell type in border insert
-var.to.plot <- "InSituType_Simple"
-sub.spe.bord$polygons[,var.to.plot] <- factor(sub.spe.bord[,var.to.plot],
-                                              levels = types.order)
+### Signal density border insert
+var.to.plot <- "log2SignalDensity"
+colLabel <- "Signal density"
 sub.spe.bord$polygons[,var.to.plot] <- sub.spe.bord[,var.to.plot]
-spe.filt <- sub.spe.bord$polygons %>% 
-  filter(!is.na(!!sym(var.to.plot))) %>%
-  group_by(!!sym(var.to.plot)) %>%
-  filter(n() >= 2) %>%
-  ungroup()
-colLabel <- "Cell types"
-p1 <- ggplot() +
-  geom_sf(data=spe.filt, 
+p1 <- ggplot() + 
+  geom_sf(data=sub.spe.bord$polygons, 
           aes(fill=!!sym(var.to.plot),
-              color =!!sym(var.to.plot)), 
+              color = !!sym(var.to.plot)), 
           lwd = 0.2)+
-  scale_fill_manual(values = celltype_palette_simple,
-                    name = colLabel) +
-  scale_color_manual(values = celltype_palette_simple,
-                     guide = "none")+
-  labs(title = NULL,
-       fill = NULL) +
+  scale_fill_viridis_c(option="mako", 
+                       breaks = scales::breaks_pretty(n = 5),
+                       guide = "none") +
+  scale_color_viridis_c(option="mako", 
+                        guide = "none") +
+  geom_sf(data = tx.insert.bord,
+          color = "firebrick",
+          size = 0.005,
+          alpha = 0.2) +
   annotate("rect",
-           xmin = insert.bord.x[1],
-           xmax = insert.bord.x[2],
-           ymin = insert.bord.y[1],
-           ymax = insert.bord.y[2],
+           xmin = insert.bord.x[1][1],
+           xmax = insert.bord.x[1][2],
+           ymin = insert.bord.x[1][1],
+           ymax = insert.bord.x[1][2],
            fill = NA,
            color = "black",
            linewidth = 0.2) +
-  my.theme 
+  labs(title = NULL,fill = NULL) +
+  my.theme +
+  guides(fill = guide_colorbar(title.position = "top", 
+                               title.hjust = 0.5,
+                               barwidth = 0.5,
+                               barheight = 4,
+                               frame.colour = "black",
+                               frame.linewidth = 0.02,
+                               ticks = element_line(linewidth = 0.2)))
+
 p1 <- plotScaleBar(p1, sub.spe.orig.bord)
 
-# Save PDF
-pdf(file.path("SuppFigure17B.pdf"), 
-    width = 10, 
-    height = 16, 
-    bg = "transparent")
-p1
-dev.off()
+# Save png
+ggsave(file.path("SuppFigure17B.png"),p1,
+       dpi = 600,
+       width = 20, 
+       height = 20, 
+       bg = "transparent")
 
 ### Cell type in triad insert
 var.to.plot <- "InSituType_Simple"

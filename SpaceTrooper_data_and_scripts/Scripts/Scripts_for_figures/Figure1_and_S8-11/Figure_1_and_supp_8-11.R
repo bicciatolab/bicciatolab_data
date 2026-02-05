@@ -20,7 +20,7 @@ fov.11.12 <- c(11,12)
 fov.31 <- c(31)
 fov.38.39 <- c(38:39)
 
-# load plot theme
+# load plot theme and scale bar
 
 source("service/service.R")
 
@@ -74,7 +74,7 @@ idxlist <- lapply(ctrl_list, function(ng){
 
 ctrl.tx <- tx[unlist(idxlist),]
 
-### select all non-nuclear transcripts
+# select non-nuclear transcripts
 no.nucl.tx <- tx[tx$target!="MALAT1"& tx$target!="NEAT1",]
   
 # Load cells flagged with FastReseg, file available at bicciatolab_data/SpaceTrooper_data_and_scripts/Scripts/Scripts_for_figures/data/Figure1
@@ -545,6 +545,7 @@ dev.off()
 
 # Supplementary figure 8
 
+### getting FoV label coordinates
 label_coord <- metadata(spe.orig)$fov_positions
 label_coord$y_global_px <- label_coord$y_global_px+4256
 
@@ -1405,7 +1406,6 @@ p3 <- p1 +
         legend.background=element_rect(fill="transparent", color=NA),
         legend.title= element_text(color = "black", size = 10),
         legend.text=element_text(color="black", size = 6),
-        legend.position = "none",
         legend.justification = c(0.95, 0.5),
         legend.box.just = "right",
         legend.margin = margin(t = -15)  ,
