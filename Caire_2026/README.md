@@ -24,11 +24,11 @@ This directory contains metadata and scripts used in `Caire et al. 2026` (paper 
 <br/><br/>
 
 ## Code reproducibility
-2D morphology analysis in TNBC H&E-derived tumor areas was performed using R (v...) and sf package (v.1.0-21). Tumor areas were identified using a Stardist-based weakly supervised machine learning object classifier in QuPath (v.0.5.0).  
+2D morphology analysis in TNBC H&E-derived tumor areas was performed using `R` (v.4.4.3) and `sf` package (v.1.0-21). Tumor areas were identified using a Stardist-based weakly supervised machine learning object classifier in `QuPath` (v.0.5.0).  
 
-All the other scripts were performed in R (v.3.6.3), using Seurat (v.3.1.5), popsicleR (v.0.2.1), scrublet (v.0.2.1), SingleR (v.1.0.6), infercnv (v.1.2.1).  
+All the other scripts were performed in `R` (v.3.6.3), using `Seurat` (v.3.1.5), `popsicleR` (v.0.2.1), `scrublet` (v.0.2.1), `SingleR` (v.1.0.6), `infercnv` (v.1.2.1).  
 
-For pseudobulk analysis Matrix.utils R package (v.0.9.8) was used to aggregate scRNA-seq data in pseudobulk, and edgeR (v.3.28.1) was used to compute differential expression analysis  
+For pseudobulk analysis `Matrix.utils` R package (v.0.9.8) was used to aggregate scRNA-seq data in pseudobulk, and `edgeR` (v.3.28.1) was used to compute differential expression analysis  
 
 For more details refer to methods section of the paper. 
 
