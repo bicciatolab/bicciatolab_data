@@ -12,7 +12,7 @@ This directory contains metadata and scripts used in `Caire et al. 2026` (paper 
 - Inputs: raw CellRanger output directory (containing raw data as downloaded by GEO) and sample identifier (`sample_name`), Scrublet Python executable and script paths (`RETICULATE_PYTHON`, `scrublet_path`), and gene position file for `infercnv`.
 - Outputs: preprocessed Seurat objects and diagnostic PDFs placed under `prepro/`, `clustering/`, `inferCNV/`, and `tumor_subset/` (QC plots, variable-gene plots, PCA/UMAP/tSNE, violin/dotplots, PC heatmaps, marker plots); inferCNV results are saved in `inferCNV/`.
 - Implementation notes: uses `popsicleR` (v 0.2.1) for initial QC, `Seurat` (v 3.1.5) for normalization, feature selection, scaling, PCA, clustering and plotting, `SingleR` (v 1.0.6) for annotation, `Scrublet` (via `reticulate`) for doublet detection, and `infercnv` (v 1.2.1) for CNV analysis; the workflow is parallelized with `future` and written for R (v3.6.3).  
-  
+<br/><br/>
 
 ### 1.2 Integration of scRNA-seq samples
 #### 1.2.1 Integration of human normal mammary glands
@@ -23,20 +23,21 @@ This directory contains metadata and scripts used in `Caire et al. 2026` (paper 
 
 #### 1.2.2 Integration of mouse developmental mammary glands
 [MouseDev_reference_integration.R](Caire_2026/MouseDev_reference_integration.R)...
-
+<br/><br/>
 
 ### 1.3 Differential expression analysis of human tumor pseudobulks
 [DEGs_pseudobulk_Met-vs-Primary.R](Caire_2026/DEGs_pseudobulk_Met-vs-Primary.R) script finds differentialy expressed genes (**DEGs**) between primary and metastatic tumor psuedobulks. The script loads per-sample Seurat objects; merges and renames cells by sample; aggregates counts into pseudobulks per sample; filters low-expressed genes; runs edgeR (normalization, dispersion, GLM) to test **metastasis** vs **primary**; extracts significant genes and prepares summary tables. The pseudobulk were generated using *aggregate.Matrix* function from the `Matrix.utils` R package (version 0.9.8), with sample as the grouping variable and *sum* as the aggregation function. For differential expression computation, standard `edgeR` pipeline was followed. To ensure reproducibility, tumor cells used for this analysis were reported in the [tumor subsets metadata](Caire_2026/Tumor_subsets_metadata.csv).
 - Input: list of all the 24 analyzed samples, as Seurat objects, containing only tumor cells and a custom label indicating if the sample is a **metastasis** or a **primary** tumor - `sample_list.rds`.
 - Outputs: lists of DEGs (`edgeR-Metastasis_vs_Primary.txt` and `edgeR-Metastasis_vs_Primary-SIG.txt`) and PDF plots (violin plots, heatmap, volcano plot)
 - Implementation notes: uses `Seurat` (v3.1.5), `Matrix.utils` (v0.9.8) for aggregation, `edgeR` (v3.28.1) for DEGs computation, and `pheatmap`/`ggplot2` for figures; written for `R` (v3.6.3).
+<br/><br/>
 
 ### 1.4 Analysis of 2D morphology in TNBC H&E-derived tumor areas
 [2D_morphology_TNBC_tumors.R](Caire_2026/2D_morphology_TNBC_tumors.R) script quantifies 2D tumor morphology from QuPath-exported GeoJSON files. The script reads per-cell annotations, extracts tumor-labeled objects, unions/simplifies and buffers polygons (tested with different buffer sizes, but the final buffer size chosen in the paper is 50 pixels), and computes morphology metrics such as area, perimeter, polygon counts, polygons per area/cell, and perimeter per area. It also joins metrics with clinical annotations for comparisons.
 - Inputs: per-sample json objects (.geojson) containing Stardist segmentation masks and cell labels identifying tumor cells.
 - Outputs: per-sample polygon images (PNG/PDF), `polygon_metrics.csv`, and `polygon_metrics_boxplots.pdf`.
 - Implementation: written for R (v4.4.3) using `sf`, `ggplot2`, `dplyr`, `data.table`, `future` (multisession), and related packages.
-
+<br/><br/>
 
 ### 1.5 Metadata of scRNA-seq data
 #### 1.5.1 Metadata of human tumor subsets
