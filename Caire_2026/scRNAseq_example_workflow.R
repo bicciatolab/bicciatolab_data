@@ -110,7 +110,7 @@ plot_grid(plot1, plot2, ncol=1)
 invisible(dev.off())
   
 # Cell-Cycle Scoring 
-umi_manualFilter <- CellCycleScoring(umi_manualFilter, s.features=cc.genes$s.genes, g2m.features=cc.genes$g2m.genes, set.ident=T)
+umi_manualFilter <- CellCycleScoring(umi_manualFilter, s.features=cc.genes$s.genes, g2m.features=cc.genes$g2m.genes, set.ident=T) # for mouse data change the cell cycle genes
 
 pdf(paste0(pre_dir, sample_id, "_plot_CellCycleGenes.pdf"), useDingbats=FALSE)
 print(RidgePlot(umi_manualFilter, features=c("PCNA", "TOP2A", "MCM6", "MKI67"), ncol=2))
@@ -141,8 +141,8 @@ scaling_data <- function(umi, sample = "UMI", vars = NULL, pre_dir = getwd(), su
   print("Generating plots")
   pt.s <- 1
   reduction <- c("PCA","tSNE","UMAP")
-  to.plot <- c("seurat_clusters","Phase","EPCAM_expressed","nFeature_RNA","nCount_RNA","percent_mt","S.Score","G2M.Score","doublets_score")
-  title <- c("Clusters @ res0.6","CC phase","EPCAM expressed","","","","","","Doublets")
+  to.plot <- c("seurat_clusters","Phase","doublets_score","nFeature_RNA","nCount_RNA","percent_mt","S.Score","G2M.Score")
+  title <- c("Clusters @ res0.6","CC phase","Doublets","","","","","")
   for (red in reduction){
     print(red)
     plot <- NULL
@@ -151,14 +151,13 @@ scaling_data <- function(umi, sample = "UMI", vars = NULL, pre_dir = getwd(), su
       if (m=="orig.ident" || m=="Phase" || m=="Cell_type") plot[[i]] <- DimPlot(umi_scaled, group.by=m, reduction=tolower(red),label=F, pt.size=pt.s) + ggtitle(title[i])
       if (m=="seurat_clusters") plot[[i]] <- DimPlot(umi_scaled, group.by=m, reduction=tolower(red),label=T, pt.size=pt.s) + ggtitle(title[i])
       if (m=="nFeature_RNA" || m=="nCount_RNA" || m=="percent_mt" || m=="S.Score" || m=="G2M.Score" || m=="doublets_score") plot[[i]] <- FeaturePlot(umi_scaled, features=m, reduction=tolower(red),pt.size=pt.s) + theme(plot.title = element_text(hjust = 0))
-      if (m=="EPCAM_expressed" || m=="COL1A1_expressed" || m=="PTPRC_expressed" || m=="CD3D_expressed") plot[[i]] <- DimPlot(umi_scaled, group.by=m, reduction=tolower(red),label=F, pt.size=pt.s, cols=c("lightgray", "red")) + ggtitle(title[i])
     }
     pdf(paste0(reg_dir,"03d_",sample,"_",red,"_",suffix,".pdf"), width=3*7, height=3*7, useDingbats=FALSE)
     print(plot_grid(plotlist=plot, ncol=3))
     invisible(dev.off())
   }
   
-  pdf(paste0(reg_dir,"03e_",sample,"_PCHeatmap_",suffix,".pdf"), width=9, height=30, useDingbats=FALSE)
+  pdf(paste0(reg_dir,sample,"_PCHeatmap_",suffix,".pdf"), width=9, height=30, useDingbats=FALSE)
   DimHeatmap(umi_scaled, dims=1:30, cells=500, balanced=T)
   invisible(dev.off())
   
@@ -172,7 +171,7 @@ scaling_data(umi_manualFilter, sample=sample_id, vars=regr_var, pre_dir=pre_dir,
 regr_var <- c("S.Score", "G2M.Score")
 scaling_data(umi_manualFilter, sample=sample_id, vars=regr_var, pre_dir=pre_dir, suffix="ccReg")
 
-# chosen to proceed either with no regression or with cell cycle regression
+# proceed either with no regression or with cell cycle regression
 all.genes <- rownames(umi_manualFilter)
 regr_var <- NULL # regr_var <- c("S.Score", "G2M.Score")
 
@@ -267,7 +266,8 @@ for (red in reduction){
 }
 
 
-# Annotation of cell types (using SingleR and BlueprintEncode reference dataset)
+# Annotation of cell types using SingleR and BlueprintEncode reference dataset for human samples
+# For mouse data cell type annotation was performed using scMCA (see methods for details)
 BpEn.se <- BlueprintEncodeData()
 singler.sc <- SingleR(test=umi_prepro@assays$RNA@data, ref=BpEn.se, labels=BpEn.se$label.main, method="single")
 	
@@ -355,6 +355,8 @@ print(p2)
 invisible(dev.off())
 ### ----------------------------------------------------------------------------------------------------------
 
+
+### PIPELINE CONTINUES ONLY FOR HUMAN SAMPLES
 
 
 ### 5 - INFERCNV ANALYSIS (USING INFERCNV)
