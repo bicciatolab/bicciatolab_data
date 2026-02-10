@@ -1,6 +1,6 @@
 # Caire et al., 2026
 
-This directory contains metadata and scripts used in `Caire et al. 2026` (paper in press), required to replicate the analysis described in the paper.
+This directory contains metadata and scripts used in `Caire et al. 2026`, required to replicate the analysis described in the paper.
 
 ## 1. Contents
 
