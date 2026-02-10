@@ -13,7 +13,7 @@ Data repository containing metadata and scripts used in `Caire et al. 2026`:
 7. normal human mammary gland scRNA-seq reference metadata for epithelial cells (L1/L2/Basal)
 
    
-Required input files are stored in [`Caire_2026`](Caire_2026) directory.
+Required input files are stored in [`Caire_2026`]([Caire_2026](https://github.com/bicciatolab/bicciatolab_data/tree/main/Caire_2026)) directory.
 <br/><br/>
 
 ## SpaceTrooper data and scripts
