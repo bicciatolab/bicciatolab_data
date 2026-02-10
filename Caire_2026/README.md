@@ -11,7 +11,7 @@ This directory contains metadata and scripts used in `Caire et al. 2026`, requir
 
 - Inputs: raw CellRanger output directory (containing raw data as downloaded by GEO) and sample identifier (`sample_name`), Scrublet Python executable and script paths (`RETICULATE_PYTHON`, `scrublet_path`), and gene position file for `infercnv`.
 - Outputs: preprocessed Seurat objects and diagnostic PDFs placed under `prepro/`, `clustering/`, `inferCNV/`, and `tumor_subset/` (QC plots, variable-gene plots, PCA/UMAP/tSNE, violin/dotplots, PC heatmaps, marker plots); inferCNV results are saved in `inferCNV/`.
-- Implementation notes: uses `popsicleR` (v 0.2.1) for initial QC, `Seurat` (v 3.1.5) for normalization, feature selection, scaling, PCA, clustering and plotting, `SingleR` (v 1.0.6) for annotation, `Scrublet` (via `reticulate`) for doublet detection, and `infercnv` (v 1.2.1) for CNV analysis; the workflow is parallelized with `future` and written for R (v3.6.3).  
+- Implementation notes: uses `popsicleR` (v 0.2.1) for initial QC, `Seurat` (v 3.1.5) for normalization, feature selection, scaling, PCA, clustering and plotting, `SingleR` (v 1.0.6) for annotation, `Scrublet` (via `reticulate`) for doublet detection, and `infercnv` (v 1.2.1) for CNV analysis; the workflow is parallelized with `future` and written for `R` (v3.6.3).  
 
 ### 1.2 Integration of scRNA-seq samples
 
@@ -21,11 +21,15 @@ This directory contains metadata and scripts used in `Caire et al. 2026`, requir
 
 - Inputs: raw Seurat objects for the three samples (`hMG1.rds`, `hMG2.rds`, `hMG3.rds`), and epithelial-cell barcode lists used to subset each sample (`hMG1_epi_cells.rds`, `hMG2_epi_cells.rds`, `hMG3_epi_cells.rds`).
 - Outputs: integrated Seurat object `hMG_epithelialIntegration.rds`; preprocessed integrated object `hMG_PD_epithelialIntegration_prepro.rds`; diagnostic PDF plots written to `preprocessing/` (dimensional reductions, feature plots, PC heatmaps) and `clustering/` (cluster/marker plots and sample distribution PDFs) directories.
-- Implementation notes: uses `Seurat` CCA-based integration (`FindIntegrationAnchors` + `IntegrateData`, *dims=1:30*, *anchor.features=2000*); the script is written for R (v3.6.3) and requires `Seurat`, `ggplot2`, `dplyr`, `cowplot`, and `future`.
+- Implementation notes: uses `Seurat` CCA-based integration (`FindIntegrationAnchors` + `IntegrateData`, *dims=1:30*, *anchor.features=2000*); the script is written for `R` (v3.6.3) and requires `Seurat`, `ggplot2`, `dplyr`, `cowplot`, and `future`.
 
 #### 1.2.2 Integration of mouse developmental mammary glands
 
-[MouseDev_reference_integration.R](MouseDev_reference_integration.R)...
+[mouse_MG_development_integration.R](mouse_MG_development_integration.R)  script integrates five scRNA-seq samples of mouse MG (all samples from [GSE111113](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE111113), and puberty sample replicate 1; [GSM2759554](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM2759554) from [GSE103272](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE103272)) to construct a reference for mouse MG development.
+
+- Input: raw Seurat objects for the five samples (`E16.rds`, `E18.rds`, `P4.rds`, `WK5.rds`, `WK12.rds`), and epithelial-cell barcode lists used to subset each sample (`E16_epi_cells.rds`, `E18_epi_cells.rds`, `P4_epi_cells.rds`, `WK5_epi_cells.rds`, `WK12_epi_cells.rds`).
+- Outputs: integrated Seurat object `mouseMG_epithelial_Integration.rds`; preprocessed integrated object `mouseMG_epithelial_Integration_prepro.rds`; diagnostic PDF plots written to `preprocessing/` and `clustering/` directories.
+- Implementation notes: uses `Seurat` CCA-based integration (`FindIntegrationAnchors` + `IntegrateData`, *dims=1:30*, *anchor.features=2000*); the script is written for `R` (v3.6.3) and requires `Seurat`, `ggplot2`, `dplyr`, `cowplot`, and `future`.
 
 ### 1.3 Differential expression analysis of human tumor pseudobulks
 
@@ -41,7 +45,7 @@ This directory contains metadata and scripts used in `Caire et al. 2026`, requir
 
 - Inputs: per-sample json objects (.geojson) containing Stardist segmentation masks and cell labels identifying tumor cells.
 - Outputs: per-sample polygon images (PNG/PDF), `polygon_metrics.csv`, and `polygon_metrics_boxplots.pdf`.
-- Implementation: written for R (v4.4.3) using `sf`, `ggplot2`, `dplyr`, `data.table`, `future` (multisession), and related packages.
+- Implementation: written for `R` (v4.4.3) using `sf`, `ggplot2`, `dplyr`, `data.table`, `future` (multisession), and related packages.
 
 ### 1.5 Metadata of scRNA-seq data
 
