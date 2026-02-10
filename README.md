@@ -3,7 +3,7 @@ Data and script repository
 <br/><br/>
 
 ## Caire at al. 2026 data and scripts
-Data repository containing metadata and scripts used in `Caire et al. 2026` paper (in press):
+Data repository containing metadata and scripts used in `Caire et al. 2026`:
 1. example scripts for scRNA-seq analysis
 2. script for the integration of normal human mammary gland scRNA-seq samples
 3. script for the integration of mouse scRNA-seq samples for mammary gland development
