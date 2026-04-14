@@ -31,5 +31,5 @@ Data repository for cellranger data required by `popsicleR` tutorial analysis (h
 <br/><br/>
 
 ## APTANI data and scripts
-Data repository for data and scripts required by [`APTANI`](https://raw.githack.com/bicciatolab/APTANI). Required files are stored in a ZIP archive.
+Data repository for data and scripts required by [`APTANI`](https://github.com/bicciatolab/APTANI). Required files are stored in a ZIP archive.
 <br/><br/>
