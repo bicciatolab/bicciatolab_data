@@ -22,7 +22,10 @@ light_theme <- theme(panel.background = element_rect(fill="white", color=NA),
                      panel.grid.major = element_line(linewidth = 0.1, colour = "grey80"),
                      panel.border = element_rect(color = "black", fill = NA, linewidth = 0.2)) 
 
-### read data table for full runtime ###
+### read data table for full runtime. All following datasets that need to be loaded 
+# for the plots are available at: 
+# bicciatolab_data/SpaceTrooper_data_and_scripts/Scripts/Scripts_for_figures/data/scalability
+
 dataset <- "full_run_data"
 full.run.data <- readRDS(file.path("data","scalability",(paste0(dataset,".rds"))))
 

@@ -15,3 +15,7 @@ Required input files are stored in [`SpaceTrooper_data_and_scripts`](SpaceTroope
 ## popsicleR tutorial data
 Data repository for cellranger data required by `popsicleR` tutorial analysis (https://raw.githack.com/bicciatolab/popsicleR/main/docs/popsicleR_tutorial.html). Required input files are stored in [`popsicleR_tutorial`](popsicleR_tutorial) directory.
 <br/><br/>
+
+## APTANI data and scripts
+Data repository for data and scripts required by [`APTANI`](https://github.com/bicciatolab/APTANI). Required files are stored in a ZIP archive.
+<br/><br/>
