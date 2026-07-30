@@ -1,7 +1,6 @@
 # Clean, minimal, and reproducible script to reproduce figures 2 and related supplementaries
 # To reproduce the analysis be sure to have the required packages installed
 # We suggest using a conda environment created using the environment file provided in https://github.com/bicciatolab/bicciatolab_data/blob/main/SpaceTrooper_data_and_scripts/Scripts/Seurat_v5.yml
-
 # R = 4.4.3
 # Usage: set wdir, data_dir, DBkero_metadata, and downstream_results, then run
 
@@ -90,7 +89,7 @@ set.seed(42)
 wdir <- ".../SpaceTrooper"                              # working directory (project root)
 data_dir <- ".../CosMx_Breast/CosMX_data_Case2"         # Nanostring data directory (for LoadNanostring)
 DBkero_metadata <- ".../CosMx_rna_DBKERO_metadata.rds"  # file path to SpatialExperiment metadata (data from https://github.com/bicciatolab/bicciatolab_data/blob/main/SpaceTrooper_data_and_scripts/Spe_metadata/CosMx_rna_DBKERO_metadata.rds)
-downstream_results <- ".../CosMx_rna_DBKERO_downstream_effects_results.rds" # file path to downstream effects results (data from https://github.com/bicciatolab/bicciatolab_data/blob/main/SpaceTrooper_data_and_scripts/Spe_metadata/CosMx_rna_DBKERO_downstream_effects_results.rds)
+downstream_results <- ".../CosMx_rna_DBKERO_downstream_effects_results.rds" # file path to downstream effects results (data from https://github.com/bicciatolab/bicciatolab_data/blob/main/SpaceTrooper_data_and_scripts/Scripts/Scripts_for_figures/data/Figure2/CosMx_rna_DBKERO_downstream_effects_results.rds)
 # ------------------------------------------------
 
 if (wdir == "" || data_dir == "") stop("Please set 'wdir' and 'data_dir' at the top of the script.")
