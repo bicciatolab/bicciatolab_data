@@ -181,7 +181,7 @@ p4 <- ggplot() +
            linewidth = 0.05)
 
 ### Quality score
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe.set.1$polygons[,var.to.plot] <- spe.set.1[,var.to.plot]
 colLabel <- "Quality score"
 p5 <- ggplot() +
@@ -211,7 +211,7 @@ p5 <- plotScaleBar(p5, spe.set.1.orig)
 
 ### QS per cell type
 var.cell.types <- "cell_types"
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 types.order <- c("Not assigned",
                  "Alpha cells",
                  "Beta cells",
@@ -391,7 +391,7 @@ p4 <- ggplot() +
            linewidth = 0.05)
 
 ### Quality score   
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe.set.2$polygons[,var.to.plot] <- spe.set.2[,var.to.plot]
 colLabel <- "Quality score"
 p5 <- ggplot() +
@@ -421,7 +421,7 @@ p5 <- plotScaleBar(p5, spe.set.2.orig)
 
 ### QS per cell type
 var.cell.types <- "cell_types"
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 types.order <- c("Not assigned",
                  "Alpha cells",
                  "Beta cells",

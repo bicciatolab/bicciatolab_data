@@ -1,4 +1,4 @@
-# Clean, minimal, and reproducible script to reproduce main figure 4 and related supplementary 18
+# Clean, minimal, and reproducible script to reproduce main figure 4 and related supplementary 22
 # To reproduce the analysis be sure to have the required packages installed
 
 library(SpaceTrooper)
@@ -78,7 +78,7 @@ celltype_palette <- c(
 # Figure 4A
 
 ### Quality score
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe$polygons[,var.to.plot] <- spe[,var.to.plot]
 colLabel <- "Quality score"
 p1 <- ggplot(data=spe$polygons) + 
@@ -132,7 +132,7 @@ dev.off()
 # Figure 4B, 4C, 4F, 4G, 4H, 4E
 
 ### Quality score in erythrocytes insert
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 sub.spe.ery$polygons[,var.to.plot] <- sub.spe.ery[,var.to.plot]
 colLabel <- "Quality score"
 p1 <- ggplot() +
@@ -320,11 +320,11 @@ pdf(file.path("Figure4_BCEFGH.pdf"),
 final_plot
 dev.off()
 
-# Supplementary figure 18
+# Supplementary figure 22
 
 ### QS per cell type
 var.cell.types <- "cell_type"
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 types.order <- c("dropped",
                  "unknown",
                  "B.Cell",
@@ -561,7 +561,7 @@ final_plot <- row1 / row2 / row3 +
   theme(plot.tag = element_text(size = 14, face = "bold"))
 
 # Save PDF
-pdf(file.path("SuppFigure18.pdf"), 
+pdf(file.path("SuppFigure22.pdf"), 
     width = 10, 
     height = 16, 
     bg = "transparent")

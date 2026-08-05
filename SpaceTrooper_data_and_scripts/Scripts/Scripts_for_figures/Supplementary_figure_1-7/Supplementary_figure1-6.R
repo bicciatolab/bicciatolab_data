@@ -46,10 +46,8 @@ for (k in 1:length(datasets)){
   x.bins <- 100
   file.name <- "Area"
   if (datasets[k] == "MERFISH_mouse_liver") {
-    var.to.plot <- "volume"
     xlabel <- expression("Volume ("*µm^3*")")
     x.bins <- 1000
-    file.name <- "Volume"
   }
   ## histogram non logged axes
   pp <- ggplot(metadata, aes(!!sym(var.to.plot))) + 
@@ -165,10 +163,7 @@ for (k in 1:length(datasets)){
   assign(paste0("p",pair_matrix[k,1]),pp)
   
   ## histogram on signal density
-  var.to.plot <- "log2CountArea"
-  if (datasets[k] == "MERFISH_mouse_liver") {
-    var.to.plot <- "log2CountVolume"
-  }
+  var.to.plot <- "log2SignalDensity"
   pp <- ggplot(metadata, aes(!!sym(var.to.plot))) + 
     geom_histogram(bins = 50, 
                    fill = "#B3C2F2",
@@ -470,7 +465,7 @@ p5 <- ggplot(filter.metadata, aes(!!sym(var.to.plot))) +
   scale_y_continuous(breaks = scales::breaks_pretty(n = 8),
                      expand = expansion(mult = c(0, 0.05))) +
   ylab("Number of cells") + 
-  xlab("Proportion of control probe counts") + 
+  xlab("Proportion of control probe intensity") + 
   theme_minimal() + 
   light_theme +
   theme(plot.margin = unit(c(0,20,0,0), "pt"))
@@ -518,7 +513,7 @@ p6 <- ggplot(filter.metadata, aes(x = total_intensity, y = !!sym(var.to.plot))) 
   scale_y_continuous(breaks = scales::breaks_pretty(n = 8),
                      expand = expansion(mult = c(0, 0.05))) +
   xlab("Total intensity") + 
-  ylab("Proportion of control probe counts") +
+  ylab("Proportion of control probe intensity") +
   theme_minimal() + 
   theme(aspect.ratio = 1) +
   light_theme +
@@ -885,68 +880,6 @@ dev.off()
 pdf(file.path("SuppFigure_6.pdf"), 
     width = 10, 
     height = 6,
-    bg = "transparent")
-final_plot
-dev.off()
-
-
-# Supplementary figure 7
-
-datasets <- c("CosMx_rna_pancreas",
-              "Xenium_lung_cancer",
-              "MERFISH_mouse_liver",
-              "CosMx_protein_tonsil")
-
-var.to.plot <- "QC_score"
-xlabel <- "Quality score"
-for (k in 1:length(datasets)){
-  metadata <- readRDS(file.path(metadata_dir,(paste0(datasets[k],"_metadata.rds"))))
-  pp <- ggplot(metadata, aes(!!sym(var.to.plot))) + 
-    geom_histogram(aes(fill = after_stat(x)),
-                   binwidth = 1/50,
-                   boundary = 0,
-                   closed = "left",
-                   color = "grey40",
-                   linewidth = 0.05) + 
-    scale_fill_viridis_c(option = "plasma", 
-                         limits = c(0, 1),
-                         breaks = seq(0, 1, by = 0.1)) +
-    scale_x_continuous(limits = c(0, 1),
-                       breaks = seq(0, 1, by = 0.1),
-                       expand = expansion(mult = c(0, 0))) +
-    scale_y_continuous(breaks = scales::breaks_pretty(n = 6),
-                       expand = expansion(mult = c(0, 0.05))) +
-    ylab("Number of cells") + 
-    xlab(xlabel) + 
-    theme_minimal() + 
-    light_theme +
-    theme(plot.margin = unit(c(0,20,0,0), "pt"),
-          aspect.ratio = 1)
-  assign(paste0("p",k),pp)
-} 
-
-### create the final plot
-final_plot <- ((p1 | p2) /
-                 (p3 | p4)) +
-  plot_layout(heights = c(1, 1, 1), widths = c(1, 1))
-# --- Build rows ---
-row1 <- p1 | p2
-row2 <- p3 | p4
-# --- Add equal spacing between rows ---
-final_plot <- (row1 / plot_spacer() /
-                 row2) +
-  plot_layout(
-    heights = c(1, 0.05, 1),
-    widths = c(1, 1)
-  ) +
-  plot_annotation(tag_levels = "A", 
-                  tag_suffix = ".") & 
-  theme(plot.tag = element_text(size = 14, face = "bold"))
-
-### save the final figure ###
-pdf(file.path("SuppFigure7.pdf"), 
-    width = 14, 
-    height = 10,
     bg = "transparent")
 final_plot
 dev.off()

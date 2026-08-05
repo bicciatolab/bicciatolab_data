@@ -1,7 +1,7 @@
 # CosMx_Protein_assay_tonsil_analysis_script
-# R 4.5.1, Bioconductor 3.22, SpaceTrooper>=1.1.3
+# R 4.5.1, Bioconductor 3.22, SpaceTrooper>=1.1.8
 
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
+if (!requireNamespace("BiocManager", quietly=TRUE)) {
   install.packages("BiocManager")
 }
 BiocManager::install("SpaceTrooper", ref="devel") 
@@ -22,6 +22,9 @@ spe <- readCosmxProteinSPE(dirName=dirname, sampleName=samplename)
 
 metadata(spe)$fov_positions$y_global_px <- metadata(spe)$fov_positions$y_global_px - 4256
 
+# It's important to run also readAndAddPolygonsToSPE because 117 cells have less than 4 points
+# in their polygons and 28 do not have polygon data.
+
 spe <- readAndAddPolygonsToSPE(spe, boundariesType="csv")
 
 # We noticed that AspectRatio provided in dataset metadata was not computed as
@@ -33,7 +36,7 @@ spe$AspectRatio <- spe$Width/spe$Height
 
 spe <- spatialPerCellQC(spe)
 
-spe <- computeQCScore(spe, verbose = FALSE)
+spe <- computeQScore(spe, verbose=FALSE)
 
 # Add cell types from metadata provided at
 # https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Spe_metadata:

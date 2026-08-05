@@ -1,4 +1,4 @@
-# CosMx_DBKERO_1k_BC_analysis_script
+# Xenium_DCIS_S2_analysis_script.R
 # R 4.5.1, Bioconductor 3.22, SpaceTrooper>=1.1.8
 
 if (!requireNamespace("BiocManager", quietly=TRUE)) {
@@ -10,14 +10,15 @@ library(SpaceTrooper)
 library(dplyr)
 
 # dirname pointing to directory containing count matrix, fov position,
-# polygons and metadata files as downloaded from https://kero.hgc.jp/Breast_Cancer_Spatial.html
+# polygons and metadata files as downloaded from:
+# https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard
 
-dirname <- "CosMX_data_Case2"
-samplename <- "CosMx_DBKERO_1k_BC"
+dirname <- "Xenium_DCIS_S2"
+samplename <- "Xenium_DCIS_S2"
 
-spe <- readCosmxSPE(dirName=dirname, sampleName=samplename)
+spe <- readXeniumSPE(dirName=dirname, sampleName=samplename, type="HDF5", addFOVs=FALSE)
 
-spe <- readAndAddPolygonsToSPE(spe, boundariesType="csv")
+spe <- readAndAddPolygonsToSPE(spe, boundariesType="parquet")
 
 spe <- spatialPerCellQC(spe, rmZeros=FALSE)
 
@@ -35,7 +36,5 @@ spe$QScore <- join_df$QScore
 # Add cell types from metadata provided at
 # https://github.com/bicciatolab/bicciatolab_data/tree/main/SpaceTrooper_data_and_scripts/Spe_metadata:
 
-meta_df <- readRDS("CosMx_rna_DBKERO_metadata.rds")
-spe$InSituType_Simple <- as.factor(meta_df[match(spe$cell_id, meta_df$cell_id),]$InSituType_Simple)
-spe$InSituType_Simple.prob <- meta_df[match(spe$cell_id, meta_df$cell_id),]$InSituType_Simple.prob
-
+meta_df <- readRDS("Xenium_DCIS_S2_metadata.rds")
+spe$cell_type <- as.factor(meta_df[match(spe$cell_id, meta_df$cell_id),]$cell_type)

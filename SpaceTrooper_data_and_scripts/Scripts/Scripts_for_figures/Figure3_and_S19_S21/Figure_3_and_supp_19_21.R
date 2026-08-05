@@ -1,4 +1,4 @@
-# Clean, minimal, and reproducible script to reproduce main figure 3 and related supplementaries 16 and 17
+# Clean, minimal, and reproducible script to reproduce main figure 3 and related supplementaries 19 and 21
 # To reproduce the analysis be sure to have the required packages installed
 
 library(SpaceTrooper)
@@ -119,7 +119,7 @@ celltype_palette_simple <- c(
 # Figure 3A
 
 ### Quality score
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe$polygons[,var.to.plot] <- spe[,var.to.plot]
 colLabel <- "Quality score"
 p1 <- ggplot() +
@@ -174,7 +174,7 @@ dev.off()
 # Figure 3B and 3C
 
 ### Quality score insert 1
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 colLabel <- "Quality score"
 sub.spe.1$polygons[,var.to.plot] <- sub.spe.1[,var.to.plot]
 p1 <- ggplot() + 
@@ -319,12 +319,12 @@ pdf(file.path("Figure3B_C.pdf"),
 final_plot
 dev.off()
 
-# Supplementary figure 16A
-# plotted together with supplementary figure 16D
+# Supplementary figure 19A
+# plotted together with supplementary figure 19D
 
 ### QS per cell type
 var.cell.types <- "InSituType_Simple"
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 types.order <- c("undefined",
                  "PNEC",
                  "Mesothelial",
@@ -376,10 +376,10 @@ p.viol <- ggplot(spe.filt, aes(x = !!sym(var.cell.types),
         panel.border=element_rect(color = "black", fill = "transparent"),
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-# Supplementary figure 16D
+# Supplementary figure 19D
 
 ### Quality score in border insert
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 sub.spe.3$polygons[,var.to.plot] <- sub.spe.3[,var.to.plot]
 colLabel <- "Quality score"
 p1 <- ggplot() +
@@ -458,7 +458,7 @@ final_plot <- row1 / row2 +
   theme(plot.tag = element_text(size = 14, face = "bold"))
 
 # Save PDF
-pdf(file.path("SuppFigure16A_D.pdf"), 
+pdf(file.path("SuppFigure19A_D.pdf"), 
     width = 10, 
     height = 16, 
     bg = "transparent")
@@ -466,7 +466,7 @@ print(final_plot)
 dev.off()
 
 
-# Supplementary figure 16C
+# Supplementary figure 19C
 
 ### Signal density insert 1
 var.to.plot <- "log2SignalDensity"
@@ -558,14 +558,14 @@ final_plot <- (row1) +
   theme(plot.tag = element_text(size = 14, face = "bold"))
 
 ### save the final figure ###
-pdf(file.path("SuppFigure16C.pdf"), 
+pdf(file.path("SuppFigure19C.pdf"), 
     width = 10, 
     height = 6,
     bg = "transparent")
 final_plot
 dev.off()
 
-# Supplementary figure 16E
+# Supplementary figure 19E
 
 xmin <- 6456.5
 xmax <- 6546
@@ -573,7 +573,7 @@ ymin <- 2226
 ymax <- 2314
 
 ### Quality score in border insert
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 sub.spe.4$polygons[,var.to.plot] <- sub.spe.4[,var.to.plot]
 colLabel <- "Quality score"
 p1 <- ggplot() +
@@ -608,7 +608,7 @@ p1 <- ggplot() +
                                ticks = element_line(linewidth = 0.2)))
 
 # Save PDF
-pdf(file.path("SuppFigure16E.pdf"), 
+pdf(file.path("SuppFigure19E.pdf"), 
     width = 10, 
     height = 16, 
     bg = "transparent")
@@ -675,7 +675,7 @@ tx.insert.bord <- tx[tx$fov%in%fov.insert.bord,]
 # Figure 3D 
 
 ### Quality score
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe$polygons[,var.to.plot] <- spe[,var.to.plot]
 colLabel <- "Quality score"
 p1 <- ggplot() +
@@ -729,7 +729,7 @@ dev.off()
 # Figure 3E and 3F
 
 ### Quality score in border insert
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 sub.spe.bord$polygons[,var.to.plot] <- sub.spe.bord[,var.to.plot]
 colLabel <- "Quality score"
 p1 <- ggplot() +
@@ -865,11 +865,11 @@ pdf(file.path("Figure3_E-F.pdf"),
 print(final_plot)
 dev.off()
 
-# Supplementary figure 17A, 17B and 17C
+# Supplementary figure 21A, 21B and 21C
 
 ### QS per cell type
 var.cell.types <- "InSituType_Simple"
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 types.order <- c("undefined",
                  "HsPCs",
                  "Fibroblast",
@@ -922,7 +922,7 @@ p.viol <- ggplot(spe.filt, aes(x = !!sym(var.cell.types),
         panel.border=element_rect(color = "black", fill = "transparent"),
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-pdf(file.path("SuppFigure17A.pdf"), 
+pdf(file.path("SuppFigure21A.pdf"), 
     width = 8, 
     height = 6, 
     bg = "transparent")
@@ -968,7 +968,7 @@ p1 <- ggplot() +
 p1 <- plotScaleBar(p1, sub.spe.orig.bord)
 
 # Save png
-ggsave(file.path("SuppFigure17B.png"),p1,
+ggsave(file.path("SuppFigure21B.png"),p1,
        dpi = 600,
        width = 20, 
        height = 20, 
@@ -1006,7 +1006,7 @@ p2 <- ggplot() +
   my.theme 
 
 # Save PDF
-pdf(file.path("SuppFigure17C.pdf"), 
+pdf(file.path("SuppFigure21C.pdf"), 
     width = 10, 
     height = 16, 
     bg = "transparent")

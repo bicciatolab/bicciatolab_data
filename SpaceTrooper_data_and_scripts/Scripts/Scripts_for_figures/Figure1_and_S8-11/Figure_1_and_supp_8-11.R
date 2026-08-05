@@ -98,7 +98,7 @@ celltype_palette <- c(
 
 # Figure 1B
 
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 xlabel <- "Quality score"
   
 metadata <- data.frame(spe)
@@ -141,7 +141,7 @@ dev.off()
 # Figure 1C
 
 ### Quality score
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe.11.12$polygons[,var.to.plot] <- spe.11.12[,var.to.plot]
 colLabel <- "Quality score"
 p1 <- ggplot() +
@@ -285,7 +285,7 @@ p2 <- ggplot() +
         panel.grid.major=element_blank()) 
 
 ### insert QS
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe.11$polygons[,var.to.plot] <- spe.11[,var.to.plot]
 colLabel <- "Quality score"
 p3 <- ggplot() +
@@ -451,7 +451,7 @@ p2 <- ggplot() +
                     panel.grid.major=element_blank())
 
 ### QS
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe.11$polygons[,var.to.plot] <- spe.11[,var.to.plot]
 colLabel <- "Quality score"
 p3 <- ggplot() +
@@ -553,7 +553,7 @@ label_coord$y_global_px <- label_coord$y_global_px+4256
 fov.xdim <- 4256
 fov.ydim <- 4256
 offset <- 700
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe$polygons[,var.to.plot] <- spe[,var.to.plot]
 colLabel <- "Quality score"
 p1 <- ggplot() +
@@ -928,7 +928,7 @@ p3 <- ggplot() +
         panel.grid.major=element_blank())
 
 ## QS insert 
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe$polygons[,var.to.plot] <- spe[,var.to.plot]
 colLabel <- "Quality score"
 p4 <- ggplot() +
@@ -1170,7 +1170,7 @@ p2 <- ggplot() +
         panel.grid.major=element_blank()) 
 
 ### Quality score
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe.31$polygons[,var.to.plot] <- spe.31[,var.to.plot]
 colLabel <- "Quality score"
 p3 <- ggplot() +
@@ -1414,7 +1414,7 @@ p3 <- p1 +
         panel.grid.major=element_blank()) 
 
 ### Quality score
-var.to.plot <- "QC_score"
+var.to.plot <- "QScore"
 spe.38.39$polygons[,var.to.plot] <- spe.38.39[,var.to.plot]
 colLabel <- "Quality score"
 pp <- ggplot() +

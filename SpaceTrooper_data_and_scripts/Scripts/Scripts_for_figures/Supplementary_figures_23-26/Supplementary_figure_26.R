@@ -1,4 +1,4 @@
-# Clean, minimal, and reproducible script to reproduce supplementary figure 19
+# Clean, minimal, and reproducible script to reproduce supplementary figure 26
 # To reproduce the analysis be sure to have the required packages installed
 
 library(ggplot2)
@@ -20,19 +20,20 @@ light_theme <- theme(panel.background = element_rect(fill="white", color=NA),
                      legend.text = element_text(color="black"),
                      panel.grid.minor = element_blank(),
                      panel.grid.major = element_line(linewidth = 0.1, colour = "grey80"),
-                     panel.border = element_rect(color = "black", fill = NA, linewidth = 0.2)) 
+                     panel.border = element_rect(color = "black", fill = NA, linewidth = 0.2))
 
-### read data table for full runtime. All following datasets that need to be loaded 
-# for the plots are available at: 
+### read data table for full runtime. All following datasets that need to be loaded
+# for the plots are available at:
 # bicciatolab_data/SpaceTrooper_data_and_scripts/Scripts/Scripts_for_figures/data/scalability
 
 dataset <- "full_run_data"
 full.run.data <- readRDS(file.path("data","scalability",(paste0(dataset,".rds"))))
 
 ### plot the full runtime vs. cells
-y_range_time <- diff(range(full.run.data$time_sec, na.rm = TRUE))
+y_range_time <- diff(range(full.run.data$elapsed_s, na.rm = TRUE))
 point_jitter_time <- ifelse(is.na(y_range_time) || y_range_time == 0, 0.5, 0.01 * y_range_time)
-p1 <- ggplot(full.run.data, aes(n, time_sec)) +
+
+p1 <- ggplot(full.run.data, aes(n, elapsed_s)) +
   geom_point(shape = 21,
              fill = "red",
              colour = "red",
@@ -47,24 +48,24 @@ p1 <- ggplot(full.run.data, aes(n, time_sec)) +
               linetype = "dashed",
               linewidth = 0.6,
               alpha = 0.9) +
+  #scale_x_log10(expand = expansion(mult = c(0.025, 0.025)),
+  #              labels = scales::label_number(),
+  #                breaks = c(10000, seq(100000, 1400000, by = 100000))) +
   scale_x_continuous(breaks = c(10000,seq(100000, 1500000, by = 100000)),
                      labels = scales::comma,
                      expand = expansion(mult = c(0.02, 0.02))) +
-  scale_y_continuous(breaks = scales::breaks_pretty(n = 6),
+  scale_y_continuous(breaks = scales::breaks_pretty(n = 6), 
                      expand = expansion(mult = c(0.02, 0.05))) +
   xlab("Number of cells") +
   ylab("Runtime (sec)") +
   light_theme +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
-### read data table for full peak memory ###
-dataset <- "full_peak_data"
-full.peak.data <- readRDS(file.path("data","scalability",(paste0(dataset,".rds"))))
-
 ### plot the RAM vs. cells
-y_range_time <- diff(range(full.peak.data$peak_RAM_GB, na.rm = TRUE))
-point_jitter_y <- ifelse(is.na(y_range_time) || y_range_time == 0, 0.5, 0.01 * y_range_time)
-p2 <-  ggplot(full.peak.data, aes(x = n, y = peak_RAM_GB)) +
+y_range_mem <- diff(range(full.run.data$peak_marginal_GB, na.rm = TRUE))
+point_jitter_y <- ifelse(is.na(y_range_mem) || y_range_mem == 0, 0.5, 0.01 * y_range_mem)
+
+p2 <- ggplot(full.run.data, aes(x = n, y = peak_marginal_GB)) +
   geom_point(shape = 21,
              fill = "red",
              color = "red",
@@ -96,9 +97,10 @@ dataset <- "core_run_data"
 core.run.data <- readRDS(file.path(main.dir,"data","scalability",(paste0(dataset,".rds"))))
 
 ### plot the core runtime vs. cells
-y_range_time <- diff(range(core.run.data$time_sec, na.rm = TRUE))
+y_range_time <- diff(range(core.run.data$elapsed_s, na.rm = TRUE))
 point_jitter_time <- ifelse(is.na(y_range_time) || y_range_time == 0, 0.5, 0.01 * y_range_time)
-p3 <- ggplot(core.run.data, aes(n, time_sec)) +
+
+p3 <- ggplot(core.run.data, aes(n, elapsed_s)) +
   geom_point(shape = 21,
              fill = "red",
              colour = "red",
@@ -119,21 +121,18 @@ p3 <- ggplot(core.run.data, aes(n, time_sec)) +
   scale_x_continuous(breaks = c(10000,seq(100000, 1500000, by = 100000)),
                      labels = scales::comma,
                      expand = expansion(mult = c(0.02, 0.02))) +
-  scale_y_continuous(breaks = scales::breaks_pretty(n = 6),
+  scale_y_continuous(breaks = scales::breaks_pretty(n = 6), 
                      expand = expansion(mult = c(0.02, 0.05))) +
   xlab("Number of cells") +
   ylab("Runtime (sec)") +
   light_theme +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
-### read data table for core peak memory ###
-dataset <- "core_peak_data"
-core.peak.data <- readRDS(file.path(main.dir,"data","scalability",(paste0(dataset,".rds"))))
-
 ### plot the RAM vs. cells
-y_range_time <- diff(range(core.peak.data$peak_RAM_GB, na.rm = TRUE))
-point_jitter_y <- ifelse(is.na(y_range_time) || y_range_time == 0, 0.5, 0.01 * y_range_time)
-p4 <-  ggplot(core.peak.data, aes(x = n, y = peak_RAM_GB)) +
+y_range_mem <- diff(range(core.run.data$peak_marginal_GB, na.rm = TRUE))
+point_jitter_y <- ifelse(is.na(y_range_mem) || y_range_mem == 0, 0.5, 0.01 * y_range_mem)
+
+p4 <- ggplot(core.run.data, aes(x = n, y = peak_marginal_GB)) +
   geom_point(shape = 21,
              fill = "red",
              color = "red",
@@ -174,42 +173,108 @@ final_plot <- (row1 / plot_spacer() /
     heights = c(1, 0.05, 1),
     widths = c(1, 1)
   ) +
-  plot_annotation(tag_levels = "A", 
-                  tag_suffix = ".") & 
+  plot_annotation(tag_levels = "A",
+                  tag_suffix = ".") &
   theme(plot.tag = element_text(size = 14, face = "bold"))
 
 ### save the final figure ###
-pdf(file.path("SuppFigure19.pdf"), 
-    width = 14, 
+pdf(file.path("SuppFigure26.pdf"),
+    width = 14,
     height = 10,
     bg = "transparent")
 final_plot
 dev.off()
 
-sessionInfo()
+# sessionInfo()
 # R version 4.5.1 (2025-06-13 ucrt)
 # Platform: x86_64-w64-mingw32/x64
 # Running under: Windows 11 x64 (build 26200)
-# 
+
 # Matrix products: default
-# LAPACK version 3.12.1
-# 
+#   LAPACK version 3.12.1
+
 # locale:
-#   [1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8    LC_MONETARY=English_United States.utf8
-# [4] LC_NUMERIC=C                           LC_TIME=English_United States.utf8    
-# 
+# [1] LC_COLLATE=English_United States.utf8 
+# [2] LC_CTYPE=English_United States.utf8   
+# [3] LC_MONETARY=English_United States.utf8
+# [4] LC_NUMERIC=C                          
+# [5] LC_TIME=English_United States.utf8    
+
 # time zone: Europe/Rome
 # tzcode source: internal
-# 
+
 # attached base packages:
-#   [1] stats     graphics  grDevices utils     datasets  methods   base     
-# 
+# [1] stats4    stats     graphics  grDevices utils     datasets  methods  
+# [8] base     
+
 # other attached packages:
-#   [1] patchwork_1.3.2 ggplot2_4.0.1  
-# 
+#  [1] patchwork_1.3.2             ggplot2_4.0.1              
+#  [3] SpaceTrooper_1.1.9          testthat_3.3.2             
+#  [5] SpatialExperiment_1.20.0    SingleCellExperiment_1.32.0
+#  [7] SummarizedExperiment_1.40.0 Biobase_2.70.0             
+#  [9] GenomicRanges_1.62.1        Seqinfo_1.0.0              
+# [11] IRanges_2.44.0              S4Vectors_0.48.0           
+# [13] BiocGenerics_0.56.0         generics_0.1.4             
+# [15] MatrixGenerics_1.22.0       matrixStats_1.5.0          
+
 # loaded via a namespace (and not attached):
-#   [1] RColorBrewer_1.1-3 R6_2.6.1           tidyselect_1.2.1   farver_2.1.2       magrittr_2.0.4     gtable_0.3.6      
-# [7] glue_1.8.0         tibble_3.3.1       dichromat_2.0-0.1  pkgconfig_2.0.3    generics_0.1.4     dplyr_1.1.4       
-# [13] lifecycle_1.0.5    cli_3.6.5          S7_0.2.1           scales_1.4.0       grid_4.5.1         vctrs_0.7.1       
-# [19] withr_3.0.2        compiler_4.5.1     rstudioapi_0.17.1  tools_4.5.1        pillar_1.11.1      colorspace_2.1-2  
-# [25] rlang_1.1.7 
+#   [1] RColorBrewer_1.1-3        rstudioapi_0.17.1        
+#   [3] jsonlite_2.0.0            shape_1.4.6.1            
+#   [5] magrittr_2.0.4            ggbeeswarm_0.7.3         
+#   [7] magick_2.9.0              farver_2.1.2             
+#   [9] fs_1.6.6                  vctrs_0.7.1              
+#  [11] memoise_2.0.1             DelayedMatrixStats_1.32.0
+#  [13] rstatix_0.7.3             S4Arrays_1.10.1          
+#  [15] usethis_3.2.1             BiocNeighbors_2.4.0      
+#  [17] broom_1.0.11              Rhdf5lib_1.32.0          
+#  [19] SparseArray_1.10.8        Formula_1.2-5            
+#  [21] rhdf5_2.54.1              KernSmooth_2.23-26       
+#  [23] desc_1.4.3                cachem_1.1.0             
+#  [25] lifecycle_1.0.5           iterators_1.0.14         
+#  [27] pkgconfig_2.0.3           rsvd_1.0.5               
+#  [29] Matrix_1.7-4              R6_2.6.1                 
+#  [31] fastmap_1.2.0             rprojroot_2.1.1          
+#  [33] scater_1.38.0             dqrng_0.4.1              
+#  [35] irlba_2.3.5.1             pkgload_1.4.1            
+#  [37] ggpubr_0.6.2              beachmat_2.26.0          
+#  [39] SpatialExperimentIO_1.2.0 mgcv_1.9-4               
+#  [41] abind_1.4-8               compiler_4.5.1           
+#  [43] proxy_0.4-29              remotes_2.5.0            
+#  [45] bit64_4.6.0-1             withr_3.0.2              
+#  [47] S7_0.2.1                  backports_1.5.0          
+#  [49] BiocParallel_1.44.0       carData_3.0-5            
+#  [51] viridis_0.6.5             DBI_1.2.3                
+#  [53] pkgbuild_1.4.8            HDF5Array_1.38.0         
+#  [55] R.utils_2.13.0            ggsignif_0.6.4           
+#  [57] DelayedArray_0.36.0       sessioninfo_1.2.3        
+#  [59] rjson_0.2.23              classInt_0.4-11          
+#  [61] tools_4.5.1               units_1.0-0              
+#  [63] vipor_0.4.7               otel_0.2.0               
+#  [65] beeswarm_0.4.0            R.oo_1.27.1              
+#  [67] glue_1.8.0                h5mread_1.2.1            
+#  [69] nlme_3.1-168              rhdf5filters_1.22.0      
+#  [71] grid_4.5.1                sf_1.0-24                
+#  [73] gtable_0.3.6              R.methodsS3_1.8.2        
+#  [75] class_7.3-23              tidyr_1.3.2              
+#  [77] data.table_1.18.0         BiocSingular_1.26.1      
+#  [79] ScaledMatrix_1.18.0       car_3.1-3                
+#  [81] XVector_0.50.0            ggrepel_0.9.6            
+#  [83] foreach_1.5.2             pillar_1.11.1            
+#  [85] limma_3.66.0              robustbase_0.99-6        
+#  [87] splines_4.5.1             dplyr_1.1.4              
+#  [89] lattice_0.22-7            survival_3.8-3           
+#  [91] bit_4.6.0                 tidyselect_1.2.1         
+#  [93] locfit_1.5-9.12           scuttle_1.20.0           
+#  [95] sfheaders_0.4.5           gridExtra_2.3            
+#  [97] edgeR_4.8.2               statmod_1.5.1            
+#  [99] devtools_2.4.6            DropletUtils_1.30.0      
+# [101] brio_1.1.5                DEoptimR_1.1-4           
+# [103] codetools_0.2-20          tibble_3.3.1             
+# [105] cli_3.6.5                 arrow_23.0.0             
+# [107] dichromat_2.0-0.1         Rcpp_1.1.1               
+# [109] parallel_4.5.1            ellipsis_0.3.2           
+# [111] assertthat_0.2.1          sparseMatrixStats_1.22.0 
+# [113] glmnet_4.1-10             viridisLite_0.4.2        
+# [115] scales_1.4.0              e1071_1.7-17             
+# [117] purrr_1.2.1               rlang_1.1.7              
+# [119] cowplot_1.2.0  
